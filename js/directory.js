@@ -7,24 +7,39 @@ class Directory {
         this.currentModal = null;
     }
 
+    /**
+     * Try Fetch the endpoint to grab random users. 
+     * Map the result to create a directory of employees.
+     * Add event listener to every employee card.
+     * Finally prints modal and hide it
+     */
      init = async() => {
-        const randomUsers = await getRandomUsers(this.endpoint);
-        this.employees = randomUsers.map(item => {
-            let employee = new Employee(item.name, item.email, item.location, item.cell, item.dob.date.substring(0,10), item.picture.medium);
-            employee.printUser();
-            return employee;
-        });
-        this.printModal();     
-
-        const employeeDivs = document.querySelectorAll('.card');
-        employeeDivs.forEach((div, index) => {
-            div.addEventListener('click', e => {
-                this.updateModal(index)
+        try {
+            const randomUsers = await getRandomUsers(this.endpoint);
+            this.employees = randomUsers.map(item => {
+                let employee = new Employee(item.name, item.email, item.location, item.cell, item.dob.date.substring(0,10), item.picture.medium);
+                employee.print();
+                return employee;
+            });
+                
+            const employeeDivs = document.querySelectorAll('.card');
+            employeeDivs.forEach((div, index) => {
+                div.addEventListener('click', e => {
+                    this.updateModal(index)
+                })
             })
-        })
+        } catch (e) {
+            gallery.innerHTML = '<p>There was an error grabbing random users info</p>';
+        } finally {
+            this.printModal(); 
+        }
     }
 
-    filterUsers = (filter) => {
+    /**
+     * Displays only the employees who have the filter in its name
+     * @param {string} filter 
+     */
+    filterEmployees = filter => {
         const users = document.querySelectorAll('#gallery .card');
         users.forEach(user => {
             const name = user.querySelector('#name').textContent.toLowerCase()
@@ -36,6 +51,10 @@ class Directory {
         });
     }
 
+    /**
+     * Builds the modal with all its elements and hide it.
+     * Add event listener to close button
+     */
     printModal = () => {
         const modalContainer = createHTMLElement('div', {'class': 'modal-container'});
         modalContainer.style.display = 'none';
@@ -45,6 +64,9 @@ class Directory {
         this.addCloseOption();
     } 
 
+    /**
+     * Build the main container of the modal and prints temporal info.
+     */
     printModalInfo = () => {
         const modal = createHTMLElement('div', {'class': 'modal'});
         
@@ -83,6 +105,10 @@ class Directory {
         return modal;
     }
 
+    /**
+     * Prints previous and next buttons to modal.
+     * Adds event listener to the buttons, validating the current employee displayed
+     */
     printModalButtons = () => {
         const buttonContainer = createHTMLElement('div', {'class': 'modal-btn-container'});
         
@@ -111,6 +137,9 @@ class Directory {
         return buttonContainer;
     }
 
+    /**
+     * Adds an event listener to the close button on the modal.
+     */
     addCloseOption = () => {
         const closeModal = document.querySelector('#modal-close-btn');
         closeModal.addEventListener('click', () => {
@@ -119,6 +148,10 @@ class Directory {
         });
     }
    
+    /**
+     * 
+     * @param {int} index 
+     */
     updateModal = index => {
         this.currentModal = index;
         console.log(this.currentModal);

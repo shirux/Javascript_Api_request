@@ -41,6 +41,7 @@ header h1 {
     max-width: 20rem;
     transition: .4s ease-out;
     outline: none;
+    box-shadow: 3px 5px 3px 0px rgba(0,0,0,0.45);
 }
 
 .search-input:active, .search-input:hover, .search-input:focus {
@@ -55,10 +56,11 @@ header h1 {
     border: 1px solid rgba(200, 200, 200, 0.9);
     transition: .4s ease-out;
     outline: none;
+    box-shadow: 3px 5px 3px 0px rgba(0,0,0,0.45);
 }
 
 .search-submit:active, .search-submit:hover, .search-submit:focus {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgb(212, 255, 187);
     border: 1px solid rgba(50, 50, 50, 0.9);
 }
 
@@ -92,6 +94,7 @@ header h1 {
     border: 1px solid rgba(50, 50, 50, 0.3);
     transition: .4s ease-out;
     overflow: hidden;
+    box-shadow: 3px 5px 3px 0px rgba(0,0,0,0.45);
 }
 
 .card-img {
@@ -248,7 +251,7 @@ header h1 {
 @media (min-width: 1024px) {
 
     .card:hover {
-        background: rgba(255, 255, 255, 1);
+        background: rgb(212, 255, 187);
         border: 1px solid rgba(50, 50, 50, 0.9);
     }
 

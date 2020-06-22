@@ -15,13 +15,19 @@ class Employee {
         this.div = null;
     }
 
-    printUser = () => {
+    /**
+     * Prints the employee withing a card container
+     */
+    print = () => {
         this.div = createHTMLElement('div', {'class': 'card'});
         this.div.appendChild(this.appendImg());
         this.div.appendChild(this.appendInfo());
         gallery.appendChild(this.div);
     }
 
+    /**
+     * Create and returns an img div with the employee image
+     */
     appendImg = () => {
         const divImg = createHTMLElement('div', {'class': 'card-img-container'});
         const img = createHTMLElement('img', {
@@ -33,6 +39,9 @@ class Employee {
         return divImg;
     }
     
+    /**
+     * Create and returns a div with employee info
+     */
     appendInfo = () => {
         const divInfo = createHTMLElement('div', {'class': 'card-info-container'});
         const h3 = createHTMLElement('h3', {
@@ -45,6 +54,5 @@ class Employee {
         divInfo.appendChild(email);
         divInfo.appendChild(location);
         return divInfo;
-    }
-    
+    } 
 }
