@@ -28,9 +28,12 @@ class Directory {
                     this.updateModal(index)
                 })
             })
+
+            
         } catch (e) {
             gallery.innerHTML = '<p>There was an error grabbing random users info</p>';
         } finally {
+            this.printSearchBar();
             this.printModal(); 
         }
     }
@@ -48,6 +51,39 @@ class Directory {
             } else {
                 user.style.display = 'none';
             }
+        });
+    }
+
+    /**
+     * Builds the search form and adds event listener to search bar
+     */
+    printSearchBar = () => {
+        const searchForm = createHTMLElement('form', {
+            'action': '#',
+            'method': 'get'
+        });
+        
+        const searchInput = createHTMLElement('input', {
+            'type': 'search',
+            'id': 'search-input',
+            'class': 'search-input',
+            'placeholder': 'Search...'
+        });
+        const searchSubmit = createHTMLElement('input', {
+            'type': 'submit',
+            'value': '🔍',
+            'id': 'search-submit',
+            'class': 'search-submit'
+        });
+
+        searchForm.appendChild(searchInput);
+        searchForm.appendChild(searchSubmit);
+        search.appendChild(searchForm);
+
+        searchForm.addEventListener('click', e => {
+            e.preventDefault();
+            const filter = document.querySelector('#search-input').value.toLowerCase();
+            directory.filterEmployees(filter);
         });
     }
 
@@ -174,7 +210,7 @@ class Directory {
         info[0].textContent = employee.email;
         info[1].textContent = employee.address.city;
         info[2].textContent = employee.cell;
-        info[3].textContent = `${employee.address.number} ${employee.address.street}, ${employee.address.city}, ${employee.address.state}`;
+        info[3].textContent = `${employee.address.number} ${employee.address.street}, ${employee.address.city} ${employee.address.zipCode}`;
         info[4].textContent = `Birthday: ${employee.birthday}`;
     }
 }

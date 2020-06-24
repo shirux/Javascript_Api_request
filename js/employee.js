@@ -8,7 +8,8 @@ class Employee {
             number: location.street.number,
             street: location.street.name,
             city: location.city,
-            state: location.state
+            state: location.state,
+            zipCode: location.postcode
         };
         this.birthday = birthday;
         this.img = img

@@ -48,20 +48,7 @@ const createHTMLElement = (tag, values = {}, textContent = '') => {
 // SELECTORS
 // ------------------------------------------
 const gallery = document.querySelector('#gallery');
-const search = document.querySelector('#search-submit');
-
-
-// ------------------------------------------
-// EVENT LISTENERS
-// ------------------------------------------
-/**
- * Filters every employee according to the search value
- */
-search.addEventListener('click', e => {
-    e.preventDefault();
-    const filter = document.querySelector('#search-input').value.toLowerCase();
-    directory.filterEmployees(filter);
-});
+const search = document.querySelector('.search-container');
 
 
 // ------------------------------------------
